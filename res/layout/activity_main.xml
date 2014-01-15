@@ -33,7 +33,7 @@
         android:layout_below="@+id/hangmantext"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="102dp"
-        android:text="Button" />
+        android:text="Guess" />
 
     <EditText
         android:id="@+id/textBox"

@@ -3,6 +3,7 @@ package com.example.hangman;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -23,8 +24,9 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		//TODO: This needs to take in the 'word' from the enter_word.xml screen. 
-		word = new String("hangmantext");
+		Intent intent = getIntent();
+		word = intent.getStringExtra("word");
+		
 		obscuredWord = new String();
 		for(int i = 0; i<word.length(); i++)
 		{

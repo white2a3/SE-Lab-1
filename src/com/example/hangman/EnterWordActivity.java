@@ -26,7 +26,9 @@ public class EnterWordActivity extends Activity {
 			public void onClick(View v) {
 				word = inputWord.getText().toString();
 				
+				//Pass view off to the activity_main.xml
 				Intent intent = new Intent(EnterWordActivity.this, MainActivity.class);
+				intent.putExtra("word", word);
 		        startActivity(intent);
 			}
 		});

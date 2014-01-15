@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_x="106dp"
         android:layout_y="150dp"
-        android:text="Button" />
+        android:text="Go" />
 
     <TextView
         android:id="@+id/textView1"
