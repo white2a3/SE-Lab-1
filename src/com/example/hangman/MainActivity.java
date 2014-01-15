@@ -22,6 +22,8 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		//TODO: This needs to take in the 'word' from the enter_word.xml screen. 
 		word = new String("hangmantext");
 		obscuredWord = new String();
 		for(int i = 0; i<word.length(); i++)
