@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class GameActivity extends Activity {
 	TextView hangmanText;
 	TextView guessedText;
 	EditText guessField;
@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
 	
 	//Called when the game is over. Transitions back to EnterWord Screen
 	protected void endGame() {
-		Intent goToStartActivity = new Intent(MainActivity.this, EnterWordActivity.class);
+		Intent goToStartActivity = new Intent(GameActivity.this, EnterWordActivity.class);
 		startActivity(goToStartActivity);
 	}
 	

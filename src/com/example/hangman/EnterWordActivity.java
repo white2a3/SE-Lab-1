@@ -30,8 +30,8 @@ public class EnterWordActivity extends Activity {
 				word = inputWord.getText().toString();
 				
 				if(word.length() > 0) { //Go to the hangman activity if the word exist
-					Intent intent = new Intent(EnterWordActivity.this, MainActivity.class);
-					//pass the chosen word to the hangman activity
+					Intent intent = new Intent(EnterWordActivity.this, GameActivity.class);
+					//pass the chosen word to the game activity
 					intent.putExtra("word", word);
 			        startActivity(intent);
 				}
