@@ -19,10 +19,20 @@ public class MainActivity extends Activity {
 	
 	String word;
 	String obscuredWord;
-	@Override
+	
+	int incorrectGuessCount;
+	
+	//Called when the game is over. Transitions back to EnterWord Screen
+	protected void endGame() {
+		Intent goToStartActivity = new Intent(MainActivity.this, EnterWordActivity.class);
+		startActivity(goToStartActivity);
+	}
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		incorrectGuessCount=0;
 		
 		Intent intent = getIntent();
 		word = intent.getStringExtra("word");
@@ -44,12 +54,18 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View arg0) {
+				//Get the user's guess and the already guessed characters
 				String guess = guessField.getText().toString();
 				String alreadyGuessed = guessedText.getText().toString();
 				
+				//clear the guess field
+				guessField.setText("");
+				
+				Context context = getApplicationContext();
+				
 				if(alreadyGuessed.contains(guess)) {
-					Context context = getApplicationContext();
-					Toast toast = Toast.makeText(context, "Already guessed that", Toast.LENGTH_SHORT);
+
+					Toast toast = Toast.makeText(context, "You already guessed that", Toast.LENGTH_SHORT);
 					toast.show();
 				}
 				else {
@@ -62,9 +78,20 @@ public class MainActivity extends Activity {
 								hangmanText.setText(obscuredWord);
 							}
 						}
+						if(obscuredWord.equals(word)) {
+							Toast toast = Toast.makeText(context, "You won", Toast.LENGTH_SHORT);
+							toast.show();
+							endGame();
+						}
 					}
 					else {
 						alreadyGuessed += guess;
+						incorrectGuessCount++;
+						if(incorrectGuessCount == 7) { //Only 7 incorrect guesses are allowed
+							Toast toast = Toast.makeText(context, "You lost", Toast.LENGTH_SHORT);
+							toast.show();
+							endGame();
+						}
 						guessedText.setText(alreadyGuessed);
 					}
 						
