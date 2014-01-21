@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 //Handles choosing a word for the hangman game
+//Test cases: Empty word, empty guess, win condition, loss condition, repeated guess.
 public class EnterWordActivity extends Activity {
 	TextView inputWord;
 	Button goButton;

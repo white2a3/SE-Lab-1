@@ -58,6 +58,10 @@ public class GameActivity extends Activity {
 				String guess = guessField.getText().toString();
 				String alreadyGuessed = guessedText.getText().toString();
 				
+				if(guess.length() == 0) {
+					return;
+				}
+				
 				//clear the guess field
 				guessField.setText("");
 				
