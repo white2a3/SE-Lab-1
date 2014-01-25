@@ -4,19 +4,35 @@
     android:layout_height="match_parent" >
 
     <EditText
-        android:id="@+id/inputWord"
+        android:id="@+id/inputWord1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="49dp"
+        android:layout_x="50dp"
         android:layout_y="86dp"
         android:ems="10" />
+    
+    <EditText
+        android:id="@+id/inputWord2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="50dp"
+        android:layout_y="136dp"
+        android:ems="10" />
 
+    <EditText
+        android:id="@+id/inputWord3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="50dp"
+        android:layout_y="191dp"
+        android:ems="10" />
+    
     <Button
         android:id="@+id/goButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="106dp"
-        android:layout_y="150dp"
+        android:layout_x="114dp"
+        android:layout_y="240dp"
         android:text="Go" />
 
     <TextView
@@ -25,7 +41,31 @@
         android:layout_height="wrap_content"
         android:layout_x="18dp"
         android:layout_y="31dp"
-        android:text="Enter a word for the other team to guess:"
+        android:text="Enter 3 words for the other team to guess:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/score1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="114dp"
+        android:layout_y="303dp"
+        android:text="(Highscore 1)" />
+
+    <TextView
+        android:id="@+id/score2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="114dp"
+        android:layout_y="350dp"
+        android:text="(Highscore 2)" />
+
+    <TextView
+        android:id="@+id/score3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="114dp"
+        android:layout_y="398dp"
+        android:text="(Highscore 3)" />
 
 </AbsoluteLayout>

@@ -16,74 +16,104 @@ public class GameActivity extends Activity {
 	TextView guessedText;
 	EditText guessField;
 	Button guessButton;
-	
-	String word;
+
+	String word1;
+	String word2;
+	String word3;
+
+	Integer previousScore;
+	Integer score;
+
 	String obscuredWord;
-	
+
 	int incorrectGuessCount;
-	
+
 	//Called when the game is over. Transitions back to EnterWord Screen
 	protected void endGame() {
-		Intent goToStartActivity = new Intent(GameActivity.this, EnterWordActivity.class);
-		startActivity(goToStartActivity);
+		//recursive base case
+		if(word2 == "" && word3 == "") {
+			Intent goToStartActivity = new Intent(GameActivity.this, EnterWordActivity.class);
+			goToStartActivity.putExtra("FinalScore", previousScore + score);
+			startActivity(goToStartActivity);
+		}
+		//not on the final word
+		else {
+			Intent newRound = new Intent(GameActivity.this, GameActivity.class);
+			
+			//shift each word down.
+			newRound.putExtra("word1", word2);
+			newRound.putExtra("word2", word3);
+			newRound.putExtra("word3", "");
+			newRound.putExtra("previousScore", 0);
+			
+	        startActivity(newRound);
+		}
 	}
-	
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		incorrectGuessCount=0;
-		
+		score = 0;
+
 		Intent intent = getIntent();
-		word = intent.getStringExtra("word");
+		word1 = intent.getStringExtra("word1");
+		word2 = intent.getStringExtra("word2");
+		word3 = intent.getStringExtra("word3");
+		previousScore = intent.getIntExtra("previousScore", 0);
 		
 		obscuredWord = new String();
-		for(int i = 0; i<word.length(); i++)
+		for(int i = 0; i<word1.length(); i++)
 		{
 			obscuredWord += '*';
 		}
-		
+
 		hangmanText = (TextView) this.findViewById(R.id.hangmantext);
 		guessField = (EditText) this.findViewById(R.id.textBox);
 		guessButton = (Button) this.findViewById(R.id.guessButton);
 		guessedText = (TextView) this.findViewById(R.id.guessedLetters);
-		
+
 		hangmanText.setText(obscuredWord);
-		
+
 		guessButton.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				//Get the user's guess and the already guessed characters
 				String guess = guessField.getText().toString();
 				String alreadyGuessed = guessedText.getText().toString();
-				
+
 				if(guess.length() == 0) {
 					return;
 				}
-				
+
 				//clear the guess field
 				guessField.setText("");
-				
+
 				Context context = getApplicationContext();
-				
+
 				if(alreadyGuessed.contains(guess)) {
 
 					Toast toast = Toast.makeText(context, "You already guessed that", Toast.LENGTH_SHORT);
 					toast.show();
 				}
 				else {
-					if(word.contains(guess)) {
-						for(int i=0; i< word.length(); i++) {
-							if(word.charAt(i) == guess.charAt(0)) {
+					if(word1.contains(guess)) {
+						for(int i=0; i< word1.length(); i++) {
+							if(word1.charAt(i) == guess.charAt(0)) {
 								char[] temp = obscuredWord.toCharArray();
 								temp[i] = guess.charAt(0);
 								obscuredWord = String.copyValueOf(temp);
 								hangmanText.setText(obscuredWord);
 							}
 						}
-						if(obscuredWord.equals(word)) {
-							Toast toast = Toast.makeText(context, "You won", Toast.LENGTH_SHORT);
+						score = score + 1;
+						
+						//Won the round
+						if(obscuredWord.equals(word1)) {
+							score = 10;
+							Toast toast = Toast.makeText(context, "You guessed the word", Toast.LENGTH_SHORT);
 							toast.show();
 							endGame();
 						}
@@ -91,16 +121,19 @@ public class GameActivity extends Activity {
 					else {
 						alreadyGuessed += guess;
 						incorrectGuessCount++;
+						
+						//Lost the round
 						if(incorrectGuessCount == 7) { //Only 7 incorrect guesses are allowed
-							Toast toast = Toast.makeText(context, "You lost", Toast.LENGTH_SHORT);
+							Toast toast = Toast.makeText(context, "You did not guess the word", Toast.LENGTH_SHORT);
 							toast.show();
 							endGame();
 						}
+						
 						guessedText.setText(alreadyGuessed);
 					}
-						
+
 				}
-				
+
 			}
 		});
 	}
