@@ -16,6 +16,9 @@ public class EnterWordActivity extends Activity {
 	TextView inputWord2;
 	TextView inputWord3;
 	Button goButton;
+	TextView score1Text;
+	TextView score2Text;
+	TextView score3Text;
 	
 	String word1;
 	String word2;
@@ -28,12 +31,20 @@ public class EnterWordActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.enter_word);
 		
-		//TODO: SET finalScore HERE!!! SAVE THEIR HIGH SCORE HERE. 
-		
 		inputWord1 = (TextView) this.findViewById(R.id.inputWord1);
 		inputWord2 = (TextView) this.findViewById(R.id.inputWord2);
 		inputWord3 = (TextView) this.findViewById(R.id.inputWord3);
 		goButton = (Button) this.findViewById(R.id.goButton);
+		score1Text = (TextView) this.findViewById(R.id.score1);
+		score2Text = (TextView) this.findViewById(R.id.score2);
+		score3Text = (TextView) this.findViewById(R.id.score3);
+		
+		Intent intent = getIntent();
+		finalScore = intent.getIntExtra("finalScore", 0);
+		//TODO: CHECK finalScore AGAINST ALL OTHER HIGHSCORES
+		//TODO: HAVE THEM INPUT THEIR NAME.
+		//TODO: SAVE THEIR HIGH SCORE HERE. 
+		
 		
 		goButton.setOnClickListener(new View.OnClickListener() {
 			

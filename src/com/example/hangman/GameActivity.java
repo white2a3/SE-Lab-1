@@ -33,7 +33,7 @@ public class GameActivity extends Activity {
 		//recursive base case
 		if(word2 == "" && word3 == "") {
 			Intent goToStartActivity = new Intent(GameActivity.this, EnterWordActivity.class);
-			goToStartActivity.putExtra("FinalScore", previousScore + score);
+			goToStartActivity.putExtra("finalScore", previousScore + score);
 			startActivity(goToStartActivity);
 		}
 		//not on the final word
